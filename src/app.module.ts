@@ -15,6 +15,7 @@ import { CustomLogger } from './core/logger/winston.logger';
 import { CustomLoggerModule } from './core/logger/logger.module';
 import { LogMiddleware } from './core/logger/middleware/log.middleware';
 import { AuthMiddleware } from './core/logger/middleware/auth.middleware';
+import { ResponseModule } from './core/http/response.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AuthMiddleware } from './core/logger/middleware/auth.middleware';
     }),
     MemberModule,
     AuthModule,
+    ResponseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -40,6 +42,6 @@ export class AppModule implements NestModule {
       .apply(LogMiddleware)
       .forRoutes({ path: '*', method: RequestMethod.ALL });
 
-    consumer.apply(AuthMiddleware);
+    // consumer.apply(AuthMiddleware);
   }
 }

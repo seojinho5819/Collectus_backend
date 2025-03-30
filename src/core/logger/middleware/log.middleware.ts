@@ -29,7 +29,7 @@ export class LogMiddleware implements NestMiddleware {
         logger.info(`query: ${path} ${JSON.stringify(query)}`);
       }
 
-      if (Object.keys(body).length) {
+      if (body && Object.keys(body).length) {
         logger.info(`body: ${path} ${JSON.stringify(body)}`);
       }
 
@@ -39,8 +39,8 @@ export class LogMiddleware implements NestMiddleware {
         if (path !== '/') {
           logger.info(
             `${method} ${path} finished in ${elapsedTime}ms (${
-              response.body.resCode || response.body.resCode === 0
-                ? response.body.resCode
+              response.body.code || response.body.code === 0
+                ? response.body.code
                 : response.status
             } ${response.body.message ? response.body.message : 'html'})`,
           );
